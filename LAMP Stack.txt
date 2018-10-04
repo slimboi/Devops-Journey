@@ -1,0 +1,60 @@
+STEPS FOR INSTALLING LAMP STACK
+
+-- su -
+To log on as root user.
+
+-- sudo passwd root
+To change root user password.
+
+-- apt-get update
+This was to update my packages/system.
+
+-- apt-get install lamp-server^
+This is to install the lamp stack,asksed for user password. Then I click Y when asked.
+
+-- mysql -u root -p
+This was to log on to mysql.
+
+-- CREATE DATABASE wordpressdb;
+This is to create the database for wordpress.
+
+-- CREATE USER slimboi@localhost IDENTIFIED BY '.......';
+This is to create the username and password to access the database.
+
+-- GRANT ALL PRIVILEGES ON wordpressdb.* TO slimboi@localhost;
+This is to give the user all privileges on the db.
+
+-- FLUSH PRIVILEGES;
+This is to tell the mysql server to roload the grant tables so the privileges to the user can take effect.
+
+-- exit
+Exit mysql.
+
+-- wget http://wordpress.org/latest.zip
+This is to download the latest wordpress version.
+
+-- unzip -q latest.zip -d /var/www/html/
+Unzip the file to the destination folder.
+
+-- chown -R www-data:www-data /var/www/html/wordpress
+This is to change ownership of the file and directories.
+
+-- chmod -R 755 /var/www/html/wordpress
+This means full permissions for the owner and read and execute permission for others.
+
+-- mkdir -p /var/www/html/wordpress/wp-content/uploads
+This helps to create the directories, and the -p is to ensure it doesn't throw up errors if any of the directories already exists.
+
+-- chown -R www-data:www-data /var/www/html/wordpress/wp-content/uploads
+This is to change ownership of the file and directories just created above.
+
+-- ifconfig
+This allows to see the ip address of the server. After obtaining the address i then use it to access mywordpress site via browser.
+
+-- Get to the wordpress 192.168.157.145/wordpress. Then input the information i configured on the terminal to connect to my wordpressdb.
+
+-- Then I log into my wordpress admin area using the username and password.
+
+
+
+

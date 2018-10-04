@@ -1,0 +1,134 @@
+-- Created 2 new VMs
+Used my template VM to clone two new VMs.
+
+-- ssh-keygen -t rsa
+This is to create the ssh key for my machines.
+
+-- head ~/.ssh/id_rsa
+Allow me to see the private key on my machine.
+
+-- sudo apt install ssh
+This is to install the ssh server on my remote machine to allow me access it and copy my key to that machine.
+
+-- ssh-copy-id dchirunga@192.168.157.132
+Copy the public ssh key from one machine to the remote machine.
+
+-- ssh dchirunga@192.168.157.132
+This is to gain access to the remote VM.
+
+-- exit
+Logout of the remote VM.
+
+-- sudo nano /etc/ssh/sshd_config
+This is to delete password authentication,so you can only log in remotely via the ssh key. Change #PasswordAuthentication from yes to no. Also ensure ChallengeResponseAuthentication is set to no.
+Then hold CTRL and X to save, and ENTER to exit.
+
+-- sudo service ssh restart
+This is to restart the ssh service.
+
+-- sudo apt-get update
+To update packages
+
+-- wget https://dev.mysql.com/get/mysql-apt-config_0.8.10-1_all.deb
+To download mysql server on machine A
+
+-- sudo dpkg -i mysql-apt-config*
+To install the .deb package and -i to indicate the specific file i wanted.
+
+-- sudo apt update
+To run an update and get latest packages.
+
+-- sudo apt install mysql-server
+To install mysql server on server A.
+
+-- sudo systemctl status mysql
+To check mysql was installed and running on the machine A.
+
+-- mysql_secure_installation
+To secure my installation, and remove unwanted elements.
+
+-- mysql -u root -p
+To connect to mysql server on machine A.
+
+-- sudo apt install mysql-client
+To install mysql client on machine B.
+
+-- mysql -u root -p -h 192.168.157.131
+This is to text connection from machine B to machine A via the client tool.
+
+-- sudo apt update
+This is to update system packages.
+
+-- sudo apt install apache2
+To install Apache2 HTTP ton machine B
+
+-- Open hostip on webpage eg. http://192.168.157.132/
+This should show you apache2 default test page.
+
+-- sudo apt-get install software-properties-common
+
+-- sudo add-apt-repository ppa:ondrej/php
+To add third party repository to upgrade to PHP 7.2
+
+-- sudo apt update
+To update system packages
+
+-- sudo apt install php7.2 libapache2-mod-php7.2 php7.2-common php7.2-mbstring php7.2-xmlrpc php7.2-soap php7.2-gd php7.2-xml php7.2-intl php7.2-mysql php7.2-cli php7.2-zip php7.2-curl
+To install PHP 7.2 and related modules.
+
+-- sudo nano /etc/php/7.2/apache2/php.ini
+To open PHP default config file for Apache2 and make changes listed below 
+file_uploads = On
+allow_url_fopen = On
+memory_limit = 256M
+upload_max_filesize = 100M
+max_execution_time = 360
+date.timezone = United Kingdom/London
+
+-- sudo systemctl restart apache2.service
+To restart Apache2
+
+-- sudo nano /var/www/html/phpinfo.php
+To test PHP 7.2 settings with Apache2, create a phpinfo.php file in Apache2 root directory. Then type in <?php phpinfo( ); ?> and save the file
+
+-- http://192.168.157.132/phpinfo.php
+To view the phpinfo page
+
+-- CREATE DATABASE wordpressdb;
+To create the database for wordpress on machine A
+
+-- CREATE USER 'slimo'@'%' IDENTIFIED BY '.........';
+To create the user profile to access the database
+
+-- GRANT ALL PRIVILEGES ON wordpressdb.* TO 'slimo'@'%' with grant option;
+To grant all privileges to user
+
+-- FLUSH PRIVILEGES;
+
+-- sudo wget http://wordpress.org/latest.zip
+This is to download the latest wordpress version.
+
+-- sudo unzip -q latest.zip -d /var/www/html/
+Unzip the file to the destination folder
+
+-- sudo chown -R www-data:www-data /var/www/html/wordpress
+This is to change ownership of the file and directories
+
+-- sudo chmod -R 755 /var/www/html/wordpress/
+This means full permissions for the owner and read and execute permission for others.
+
+-- sudo mv /var/www/html/wordpress/wp-config-sample.php /var/www/html/wordpress/wp-config.php
+To configure wordpress
+
+-- sudo nano /var/www/html/wordpress/wp-config.php
+To open the wordpress configuration file. Here is where you input the information from your database that was created on machine A. Ensure the user profile you created on machine A can be accessed from mysql client on Machine B.
+
+-- Save and exit
+
+-- Then go to ipaddress/wordpress
+To finish the web configuration.
+
+
+
+
+

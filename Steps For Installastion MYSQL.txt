@@ -1,0 +1,30 @@
+STEPS FOR INSTALLING MYSQL ON UBUNTU
+-- pwd
+This was to check the directory i was working in.
+
+-- cd /tmp
+Used the above command to change my working directory to temp for downloading the installation file.
+
+-- wget https://dev.mysql.com/get/mysql-apt-config_0.8.10-1_all.deb
+I used the command wget along with the link copied from the mysql download page. I got the link by selecting download at the bottom right hand corner of the page, and then right clicking on 'no thanks, just start my download' to copy link address.
+
+-- ls
+This was to list the files so i can check the filename mysql-apt-config_0.8.10-1_all.deb ... and see that its there and ready for installation.
+
+-- sudo dpkg -i mysql-apt-config*
+I used dpkg to install the .deb packpage that was downloaded ,and -i to indicate i wanted to install that specific file. On the config screen i just choose the defaults which added the repository info for the latest stable version of mysql. Just select OK, and click ENTER.
+
+-- sudo apt update
+Just to run an update of the apt package cache to make the new software packages available.
+
+-- sudo apt install mysql-server
+Apt looked for the mysql-server package, and then i clicked Y when asked and then ENTER. I then set a root password when asked. Then selected Use Strong Password Encryption for default authentication plugin. 
+
+-- sudo systemctl status mysql
+This was used to check that MYSQL was installed and running, The Active: active (running) which should appear at the end of the output from running the above code, means MYSQL is up and running.
+
+-- mysql_secure_installation
+This was to secure my installation. Running this will ask for root password which I set during the installation. I clicked ENTER to skip the validate password plugin, and change root password. I pressed Y and ENTER to remove anonymous user, disallow remote root login, remove test database, and reload previledge tables.
+
+-- mysqladmin -u root -p version
+I used this to connect to the server and bring out some sersion and status information about the server.
